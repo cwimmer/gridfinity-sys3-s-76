@@ -13,7 +13,7 @@ $fs = 0.25;
 
 /* [General Settings] */
 // number of bases along x-axis
-gridx = 5;
+gridx = 6;
 // number of bases along y-axis
 gridy = 0;
 
@@ -69,20 +69,29 @@ color("tomato")
 difference() {
     translate([distancex/2, distancey/2, 0])
         gridfinityBaseplate([gridx, gridy], l_grid, [distancex, distancey], style_plate, hole_options, style_hole, [fitx, fity]);
+    // Bottom Left corner
     translate([0,0,-1])
         cylinder(d=28, h=10, $fn=100);
+    // Bottom Right corner
     translate([distancex, 0, -1])
         cylinder(d=28, h=10, $fn=100);
+    // Top Right corner
     translate([distancex, distancey, -1])
+        cube([21, 36.5, 20], center=true);
         cylinder(d=28, h=10, $fn=100);
+    // Top Left corner
     translate([0, distancey, -1])
-        cylinder(d=28, h=10, $fn=100);
-    translate([-1, distancey/2-3.75, -1])
+        cube([21, 36.5, 20], center=true);
+    // Left notch
+    translate([-1, distancey/2-1.75, -1])
         cube([7.5, 7.5, 10]);
-    translate([distancex-6.5, distancey/2-3.75, -1])
+    // Right notch
+    translate([distancex-6.5, distancey/2-1.75, -1])
         cube([7.5, 7.5, 10]);
+    // Front notche
     translate([notch_offset, -1, -1])
-        cube([notch, 16, 10]);
-    translate([notch_offset, distancey-15, -1])
-        cube([notch, 16, 10]);
+        cube([notch, 13, 10]);
+    // Rear notche
+    translate([notch_offset, distancey-8, -1])
+        cube([notch, 9, 10]);
 }
